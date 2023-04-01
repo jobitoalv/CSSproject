@@ -22,7 +22,21 @@
   <img src="https://www.hollywoodreporter.com/wp-content/uploads/2019/12/42fea_bestof-yodaillo_w-splash_2019.jpg?w=1500&h=844&crop=1" width="1000" height="700">
 
   <style>
+    :root {
+      --base: #ffc600;
+      --space: 10px;
+      --blur: 10px;
+    }
 
+    img {
+      padding: var(--space);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .h1 {
+      color: var(--base);
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -40,12 +54,22 @@
       margin-bottom: 50px;
     }
 
-    input {s
+    input {
       width: 100px;
     }
-  </style>
 
+  </style>
+    
   <script>
+    const input = document.querySelectorAll('.controls input');
+
+    function handleUpdate() {
+     const suffix = this.dataset.sizing || '';
+     document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+    }
+
+    input.forEach(input => input.addEventListener('change', handleUpdate));
+    input.forEach(input => input.addEventListener('mousemove', handleUpdate));
   </script>
 
 </body>
